@@ -50,7 +50,6 @@
 
 <script setup>
 import { gsap } from 'gsap';
-import { onMounted } from 'vue';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import CardComponent from '../components/cardComponents.vue';
 gsap.registerPlugin(ScrollTrigger);
@@ -64,7 +63,6 @@ gsap.registerPlugin(ScrollTrigger);
     min-height: 100vh;
     position: relative;
     display: flex;
-    border-bottom: 1px solid #d5d5d5;
 }
 
 .third-content {
@@ -96,7 +94,6 @@ gsap.registerPlugin(ScrollTrigger);
 .third-card-wrapper {
     align-items: center;
     display: flex;
-    flex-direction: row;
     flex-wrap: wrap;
     gap: 30px;
     justify-content: center;
@@ -104,5 +101,23 @@ gsap.registerPlugin(ScrollTrigger);
     margin: 0 auto;
 }
 
+@media screen and (max-width: 600px) {
+    .third-content-title h2 {
+        font-size: 2rem;
+    }
+
+    .third-card-wrapper {
+        width: 90vw;
+        flex-direction: column;
+    }
+
+    .third-card-wrapper .card-container {
+        width: 90vw;
+    }
+
+    
+
+    
+}
 
 </style>

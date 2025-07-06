@@ -43,7 +43,6 @@ function SecondPageAnimation() {
     position: relative;
     display: flex;
     padding-bottom: 3rem;
-    border-bottom: 1px solid #d5d5d5;
 }
 
 .second-content {
@@ -82,5 +81,16 @@ function SecondPageAnimation() {
     font-size: 5rem;
     font-weight: lighter;
     line-height: 1.5;
+}
+
+/* 移动端适配 */
+@media screen and (max-width: 600px) {
+    .second-content-title h2 {
+        font-size: 2rem;
+    }
+
+    .second-content-text {
+        font-size: 2.5rem;
+    }
 }
 </style>

@@ -4,31 +4,95 @@
             <div class="fifth-content-title">
                 <h2>「SMBUCA Lab」</h2>
             </div>
+            <div class="scroll-container">
+                <div class="fifth-content-wrapper">
+                    <div class="wrap-cards" ref="cardsContainer">
+                        <div class="wrap-card" style="background-image: url('/SMBUCA_1.png')">
+                            <div class="wrap-card-title">
+                                <h3>「NaviR导航」</h3>
+                            </div>
+                        </div>
+                        <div class="wrap-card" style="background-image: url('/SMBUCA_3.jpg')">
+                            <div class="wrap-card-title">
+                                <h3>「Happy-LLM」</h3>
+                            </div>
+                        </div>
+                        <div class="wrap-card" style="background-image: url('/SMBUCA_4.png')">
+                            <div class="wrap-card-title">
+                                <h3>「深度学习」</h3>
+                            </div>
+                        </div>
+                        <div class="wrap-card" style="background-image: url('/SMBUCA_5.webp')">
+                            <div class="wrap-card-title">
+                                <h3>「AI-Agent」</h3>
+                            </div>
+                        </div>
+                        <div class="wrap-card" style="background-image: url('/SMBUCA_2.png')">
+                            <div class="wrap-card-title">
+                                <h3>「AR探索」</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bottom-space"></div>
         </div>
     </div>
 </template>
 
 <script setup>
 import { gsap } from 'gsap';
-import { onMounted } from 'vue';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { onMounted, ref } from 'vue';
 
+gsap.registerPlugin(ScrollTrigger);
 
+const cardsContainer = ref(null);
+
+onMounted(() => {
+    const scrollbox = {
+        container: cardsContainer.value,
+        distance: 0,
+        init() {
+            this.resize();
+            window.addEventListener("resize", this.resize.bind(this));
+            this.create_scrolltrigger();
+        },
+        create_scrolltrigger() {
+            ScrollTrigger.create({
+                trigger: ".scroll-container",
+                pin: true,
+                start: "top top",
+                end: () => `+=${this.distance}`,
+                scrub: 1,
+                onUpdate: (self) => {
+                    gsap.to(this.container, {
+                        x: -this.distance * self.progress,
+                        duration: 0
+                    });
+                }
+            });
+        },
+        resize() {
+            this.distance = this.container.offsetWidth - window.innerWidth + 100;
+            document.querySelector('.scroll-container').style.height = `${this.distance}px`;
+            document.querySelector('.bottom-space').style.height = `${window.innerHeight * 1.5}px`;
+        }
+    };
+    scrollbox.init();
+});
 </script>
 
 <style scoped>
 /*第五页面样式 */
 .fifth-container {
     width: 100%;
-    min-height: 100vh;
     position: relative;
     display: flex;
-    padding-bottom: 3rem;
-    border-bottom: 1px solid #d5d5d5;
 }
 
 .fifth-content {
     width: 100%;
-    min-height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -41,26 +105,77 @@ import { onMounted } from 'vue';
     height: auto;
     display: flex;
     justify-content: left;
+    margin-bottom: 5vh;
 }
 
 .fifth-content-title h2 {
     padding-left: 8vw;
     font-size: 3rem;
     font-weight: 900;
-    margin-bottom: 2vh;
     letter-spacing: 0.05em;
 }
 
-.fifth-content-text {
-    width: 90%;
-    padding-left: 8vw;
-    height: auto;
+.scroll-container {
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+}
+
+.fifth-content-wrapper {
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
     display: flex;
-    flex-direction: column;
-    word-wrap: break-word;
-    justify-content: flex-start;
-    font-size: 5rem;
-    font-weight: lighter;
-    line-height: 1.5;
+    align-items: center;
+}
+
+.wrap-cards {
+    display: flex;
+    gap: 3rem;
+    padding: 0 8vw;
+    height: 100%;
+    align-items: center;
+    will-change: transform;
+}
+
+.wrap-card {
+    width: 50vw;
+    height: 50vh;
+    background-color: #f0f0f0;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    flex-shrink: 0;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    border-radius: 30px 0 30px 0;
+}
+
+.wrap-card-title {
+    text-align: right;
+    position: relative;
+    z-index: 2;
+}
+
+.wrap-card-title h3 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0;
+    color: #f0f0f0;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.bottom-space {
+    width: 100%;
+    height: 80vh; 
 }
 </style>
+

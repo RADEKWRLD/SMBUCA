@@ -1,43 +1,32 @@
 <template>
   <div id="app">
-    <div class="scroll-container">
-      <div class="scroll-content" :style="{ transform: `translateY(${-scrollY}px)` }">
         <router-view></router-view>
-      </div>
-    </div>
   </div>
 </template>
 
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue';
+/* 平滑滚动 */
+import Lenis from 'lenis';
 
-const scrollY = ref(0);
-let ticking = false;
+const lenis = new Lenis({
+  duration: 1.2,
+  easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+  direction: 'vertical',
+  gestureDirection: 'vertical',
+  smooth: true,
+  mouseMultiplier: 1,
+  smoothTouch: false,
+  touchMultiplier: 2,
+  infinite: false,
+})
 
-const updateScroll = () => {
-  if (!ticking) {
-    window.requestAnimationFrame(() => {
-      scrollY.value = window.scrollY;
-      ticking = false;
-    });
-    ticking = true;
-  }
-};
+function raf(time) {
+  lenis.raf(time)
+  requestAnimationFrame(raf)
+}
 
-onMounted(() => {
-  // 获取内容实际高度并设置到body上
-  const scrollContent = document.querySelector('.scroll-content');
-  if (scrollContent) {
-    document.body.style.height = `${scrollContent.offsetHeight}px`;
-  }
-  
-  window.addEventListener('scroll', updateScroll);
-});
-
-onUnmounted(() => {
-  window.removeEventListener('scroll', updateScroll);
-});
+requestAnimationFrame(raf)
 </script>
 
 

@@ -1,27 +1,5 @@
 <template>
-  <nav class="navbar">
-    <div class="navContent">
-      <span class="nav-title">S M B U C A</span>
-    </div>
-
-    <div class="navRight">
-      <ul>
-        <li>
-          <button>
-            <div class="li-content">首页</div>
-          </button>
-        </li>
-        <li>
-          <button>
-            <div class="li-content">友链</div>
-          </button>
-        </li>
-      </ul>
-    </div>
-  </nav>
-
   <DotSphere class="background-sphere" />
-
 
   <div class="main-container">
     <div class="main-content">
@@ -38,8 +16,8 @@
   <ThirdPage />
   <ForthPage />
   <FifthPage />
+  <SixthPage />
 </template>
-
 
 <script setup>
 import DotSphere from '@/components/DotSphere.vue';
@@ -47,6 +25,7 @@ import SecondPage from '@/views/SecondPage.vue';
 import ThirdPage from '@/views/ThirdPage.vue';
 import ForthPage from '@/views/ForthPage.vue';
 import FifthPage from '@/views/FifthPage.vue';
+import SixthPage from '@/views/SixthPage.vue';
 import { gsap } from 'gsap';
 import { onMounted, ref } from 'vue';
 
@@ -96,78 +75,9 @@ function WelcomeAnimation() {
       repeatDelay:0.5
     });
 }
-
-
 </script>
 
-
 <style scoped>
-.navbar {
-  /*固定顶部 */
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 1000;
-
-  /**基础样式 */
-  background-color: rgba(255, 255, 255, 0.8);
-  /* 半透明白色背景 */
-  backdrop-filter: blur(8px);
-  /* 背景模糊效果 */
-  -webkit-backdrop-filter: blur(8px);
-  /* Safari 兼容 */
-  padding: 10px 20px;
-  /* 内边距 */
-  border-bottom: 1px solid #e0e0e0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 100px;
-}
-
-.navContent {
-  display: flex;
-  align-items: center;
-  height: 100%;
-}
-
-
-.nav-title {
-  padding-left: 10rem;
-}
-
-.navRight {
-  padding-right: 5rem;
-}
-
-ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  gap: 1rem;
-}
-
-.li-content {
-  font-size: 1.2rem;
-  font-weight: bold;
-}
-
-button {
-  width: 6rem;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 8px 16px;
-  transition: all 0.3s ease;
-}
-
-button:hover {
-  background-color: rgba(0, 0, 0, 0.05);
-  border-radius: 4px;
-}
-
 /* 背景球 */
 .background-sphere {
   position: absolute;
@@ -186,7 +96,6 @@ button:hover {
   display: flex;
 }
 
-
 .main-content {
   width: 100%;
   height: 100vh;
@@ -196,7 +105,6 @@ button:hover {
   align-items: flex-start;
   padding-top: 40vh;
 }
-
 
 .main-content-text {
   position: relative;
@@ -209,7 +117,6 @@ button:hover {
 .main-content-text .welcome {
   color: #000;
   margin-bottom: 0.2rem;
-
 }
 
 .main-content-text .letter {
@@ -227,6 +134,34 @@ button:hover {
   margin-top: 1rem;
 }
 
+/* 移动端适配 */
+@media screen and (max-width: 600px) {
+  .main-content {
+    justify-content: center;
+    align-items: center;
+    padding-top: 0;
+  }
+
+  .main-content-text {
+    margin-left: 0;
+    text-align: center;
+  }
+
+  .main-content-text .letter {
+    font-size: 3rem;
+  }
+
+  .main-content-text .char {
+    font-size: 1.5rem;
+  }
+
+  .background-sphere {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
 /*遮罩 */
 .mask {
   position: absolute;
@@ -238,6 +173,4 @@ button:hover {
   background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
   pointer-events: none;
 }
-
-
 </style>

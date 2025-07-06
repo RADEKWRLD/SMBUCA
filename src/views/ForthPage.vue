@@ -201,6 +201,39 @@ const cards = ref([
     letter-spacing: 0.05em;
 }
 
+/* 添加移动端适配 */
+@media screen and (max-width: 600px) {
+    .forth-content-title h2 {
+        font-size: 2rem;
+    }
+    
+    /* 优化移动端其他样式 */
+    .forth-content {
+        padding-left: 5vw;
+        padding-right: 5vw;
+    }
+    
+    .card {
+        padding: 1.5rem;
+        padding-bottom: 4rem;
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .icon {
+        width: 6rem;
+        height: 6rem;
+    }
+
+    .card-desc .title {
+        font-size: 0.5rem;
+    }
+
+    .card-desc .text {
+        font-size: 0.25rem;
+    }
+}
+
 .forth-content-text {
     width: 90%;
     height: auto;
@@ -266,6 +299,8 @@ const cards = ref([
     font-size: 3rem;
     font-weight: bold;
     margin-bottom: 0.5rem;
+    word-wrap: break-word;
+    word-break: break-word;
 }
 
 .card-desc .text {
@@ -273,5 +308,7 @@ const cards = ref([
     font-weight: lighter;
     font-size: 5rem;
     line-height: 1.5;
+    word-wrap: break-word;
+    word-break: break-word;
 }
 </style>
