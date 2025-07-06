@@ -32,7 +32,6 @@
         <span class="char" v-for="(char, index) in chars" :key="index">{{ char }}</span>
       </div>
     </div>
-    <div class="mask"></div>
   </div>
 
 
@@ -54,12 +53,12 @@ onMounted(() => {
 })
 
 /**初始化文字 */
-const letters = ref('WELCOME_');
+const letters = ref('WELCOME');
 const chars = ref('MSU-BIT@Shenzhen');
 function WelcomeAnimation() {
   /**WELCOME动画 */
   gsap.fromTo('.letter', {
-    opacity:0,
+    opacity: 0,
     y: 50,
     scale: 0.5,
     rotationY: 180,
@@ -69,9 +68,12 @@ function WelcomeAnimation() {
       y: 0,
       scale: 1,
       rotationY: 0,
-      duration: 3,
+      duration: 0.2,
       ease: 'power2.inOut',
       stagger: 0.1,
+      repeat:-1,
+      yoyo:true,
+      repeatDelay:2
     });
 
   /**深圳北理莫斯科计算机协会动画 */
@@ -226,18 +228,6 @@ button:hover {
   margin-top: 1rem;
 }
 
-/*遮罩 */
-.mask {
-  position: absolute;
-  z-index: 999;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height:30%;
-  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
-  pointer-events: none;
-}
-
 /*第二页面样式 */
 .second-container {
   width: 100%;
@@ -255,5 +245,4 @@ button:hover {
   align-items: flex-start;
   padding-top: 40vh;
 }
-
 </style>

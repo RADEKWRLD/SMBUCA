@@ -18,13 +18,6 @@
   font-style: normal;
 }
 
-@font-face {
-  font-family:'Newsreader';
-  src: url('./assets/fonts/Newsreader-VariableFont_opsz,wght.ttf');
-  font-weight: normal;
-  font-style: normal;
-}
-
 #app {
   min-height: 100vh;
   font-family: 'ZenDots', Arial, sans-serif;

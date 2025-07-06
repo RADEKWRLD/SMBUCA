@@ -226,18 +226,6 @@ button:hover {
   margin-top: 1rem;
 }
 
-/*遮罩 */
-.mask {
-  position: absolute;
-  z-index: 999;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height:30%;
-  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
-  pointer-events: none;
-}
-
 /*第二页面样式 */
 .second-container {
   width: 100%;
@@ -256,4 +244,14 @@ button:hover {
   padding-top: 40vh;
 }
 
+.mask {
+  position: absolute;
+  z-index: 3000;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height:50%;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
+  pointer-events: none;
+}
 </style>

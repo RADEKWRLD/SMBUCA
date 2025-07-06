@@ -26,13 +26,12 @@
   <div class="main-container">
     <div class="main-content">
       <div class="main-content-text">
-        <div class="welcome">
+        <h1 class="welcome">
           <span class="letter" v-for="(letter, index) in letters" :key="index">{{ letter }}</span>
-        </div>
+        </h1>
         <span class="char" v-for="(char, index) in chars" :key="index">{{ char }}</span>
       </div>
     </div>
-    <div class="mask"></div>
   </div>
 
 
@@ -53,47 +52,43 @@ onMounted(() => {
   WelcomeAnimation();
 })
 
-/**初始化文字 */
-const letters = ref('WELCOME_');
+
+const letters = ref('WELCOME');
 const chars = ref('MSU-BIT@Shenzhen');
 function WelcomeAnimation() {
   /**WELCOME动画 */
   gsap.fromTo('.letter', {
-    opacity:0,
+    opacity: 0,
     y: 50,
     scale: 0.5,
-    rotationY: 180,
+    rotation: 180,
   },
     {
       opacity: 1,
       y: 0,
       scale: 1,
-      rotationY: 0,
-      duration: 3,
+      rotation: 0,
+      duration: 0.8,
       ease: 'power2.inOut',
       stagger: 0.1,
-    });
+    })
 
-  /**深圳北理莫斯科计算机协会动画 */
-  gsap.fromTo(".char", {
-    opacity: 0,
-    x: 100,
-    scale: 0.5,
-    rotationZ: 360,
-  },
+    /**深圳北理莫斯科计算机协会动画 */
+    gsap.fromTo(".char",{
+      opacity: 0,
+      x: 100,
+      scale: 0.5,
+    },
     {
       opacity: 1,
       x: 0,
       scale: 1,
-      rotationZ: 0,
-      duration: 0.2,
+      rotation: 0,
+      duration: 0.5,
       ease: 'power2.inOut',
       stagger: 0.1,
-      delay: 0.5,
-      repeat:-1,
-      yoyo:true,
-      repeatDelay:0.5
-    });
+      delay:0.8
+    })
 }
 
 
@@ -206,36 +201,15 @@ button:hover {
   margin-left: 10vw;
 }
 
-.main-content-text .welcome {
-  margin-bottom: 0.2rem;
-
-}
-
 .main-content-text .letter {
-  font-size: 6rem;
-  font-weight: bold;
-  gap: 0.5rem;
+  font-size: 5rem;
+  margin-bottom: 1rem;
   padding: 0;
 }
 
 .main-content-text .char {
-  font-family: 'Newsreader';
-  font-size: 2.5rem;
-  font-weight: lighter;
-  line-height: 1.5;
+  font-size: 2rem;
   margin-top: 1rem;
-}
-
-/*遮罩 */
-.mask {
-  position: absolute;
-  z-index: 999;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height:30%;
-  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
-  pointer-events: none;
 }
 
 /*第二页面样式 */
@@ -255,5 +229,4 @@ button:hover {
   align-items: flex-start;
   padding-top: 40vh;
 }
-
 </style>

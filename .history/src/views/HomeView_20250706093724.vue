@@ -5,34 +5,35 @@
     </div>
 
     <div class="navRight">
-      <ul>
-        <li>
-          <button>
-            <div class="li-content">首页</div>
-          </button>
-        </li>
-        <li>
-          <button>
-            <div class="li-content">友链</div>
-          </button>
-        </li>
-      </ul>
-    </div>
+        <ul>
+          <li>
+            <button>
+              <div class="li-content">首页</div>
+            </button>
+          </li>
+          <li>
+              <button>
+              <div class="li-content">友链</div>
+              </button>
+          </li>
+        </ul>
+      </div>
   </nav>
 
-  <DotSphere class="background-sphere" />
+  <DotSphere class="background-sphere"/>
 
 
   <div class="main-container">
     <div class="main-content">
       <div class="main-content-text">
-        <div class="welcome">
-          <span class="letter" v-for="(letter, index) in letters" :key="index">{{ letter }}</span>
-        </div>
-        <span class="char" v-for="(char, index) in chars" :key="index">{{ char }}</span>
+        <h1 class="welcome">
+          <span class="letter" v-for="(letter, index) in welcomeText" :key="index">{{ letter }}</span>
+        </h1>
+        <p class="association">
+          <span class="char" v-for="(char, index) in associationText" :key="index">{{ char }}</span>
+        </p>
       </div>
     </div>
-    <div class="mask"></div>
   </div>
 
 
@@ -46,57 +47,79 @@
 
 <script setup>
 import DotSphere from '@/components/DotSphere.vue';
-import { gsap } from 'gsap';
-import { onMounted, ref } from 'vue';
+import {gsap} from 'gsap';
+import {onMounted, ref} from 'vue';
+
+const welcomeText = ref('WELCOME');
+const associationText = ref('深圳北理莫斯科计算机协会');
 
 onMounted(() => {
   WelcomeAnimation();
+  AssociationAnimation();
 })
 
-/**初始化文字 */
-const letters = ref('WELCOME_');
-const chars = ref('MSU-BIT@Shenzhen');
-function WelcomeAnimation() {
-  /**WELCOME动画 */
-  gsap.fromTo('.letter', {
-    opacity:0,
-    y: 50,
-    scale: 0.5,
-    rotationY: 180,
-  },
+function WelcomeAnimation(){
+  // 为每个字母创建动画
+  gsap.fromTo('.letter', 
+    {
+      opacity: 0,
+      y: 50,
+      rotationX: -90,
+      scale: 0.5
+    },
     {
       opacity: 1,
       y: 0,
+      rotationX: 0,
       scale: 1,
-      rotationY: 0,
-      duration: 3,
-      ease: 'power2.inOut',
+      duration: 0.8,
       stagger: 0.1,
-    });
+      ease: "back.out(1.7)"
+    }
+  );
 
-  /**深圳北理莫斯科计算机协会动画 */
-  gsap.fromTo(".char", {
-    opacity: 0,
-    x: 100,
-    scale: 0.5,
-    rotationZ: 360,
-  },
+  // 添加持续的浮动动画
+  gsap.to('.letter', {
+    y: -10,
+    duration: 2,
+    stagger: 0.1,
+    repeat: -1,
+    yoyo: true,
+    ease: "power2.inOut",
+    delay: 2
+  });
+}
+
+function AssociationAnimation(){
+  // 为每个字符创建动画
+  gsap.fromTo('.char', 
+    {
+      opacity: 0,
+      x: -30,
+      scale: 0.8
+    },
     {
       opacity: 1,
       x: 0,
       scale: 1,
-      rotationZ: 0,
-      duration: 0.2,
-      ease: 'power2.inOut',
-      stagger: 0.1,
-      delay: 0.5,
-      repeat:-1,
-      yoyo:true,
-      repeatDelay:0.5
-    });
+      duration: 0.6,
+      stagger: 0.05,
+      ease: "power2.out",
+      delay: 1
+    }
+  );
+
+  // 添加颜色变化动画
+  gsap.to('.char', {
+    color: '#4a90e2',
+    duration: 3,
+    stagger: 0.1,
+    repeat: -1,
+    yoyo: true,
+    ease: "power2.inOut",
+    delay: 3
+  });
 }
-
-
 </script>
 
 
@@ -206,36 +229,42 @@ button:hover {
   margin-left: 10vw;
 }
 
-.main-content-text .welcome {
-  margin-bottom: 0.2rem;
-
-}
-
-.main-content-text .letter {
-  font-size: 6rem;
-  font-weight: bold;
-  gap: 0.5rem;
+.main-content-text h1 {
+  font-size: 5rem;
+  margin-bottom: 1rem;
   padding: 0;
+  display: flex;
+  gap: 0.5rem;
 }
 
-.main-content-text .char {
-  font-family: 'Newsreader';
-  font-size: 2.5rem;
-  font-weight: lighter;
-  line-height: 1.5;
+.main-content-text p {
+  font-size: 2rem;
   margin-top: 1rem;
+  display: flex;
+  gap: 0.2rem;
 }
 
-/*遮罩 */
-.mask {
-  position: absolute;
-  z-index: 999;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height:30%;
-  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
-  pointer-events: none;
+.letter {
+  display: inline-block;
+  transform-style: preserve-3d;
+  transition: all 0.3s ease;
+}
+
+.char {
+  display: inline-block;
+  transition: all 0.3s ease;
+}
+
+.letter:hover {
+  transform: scale(1.2) rotateY(10deg);
+  color: #4a90e2;
+  text-shadow: 0 0 10px rgba(74, 144, 226, 0.5);
+}
+
+.char:hover {
+  transform: scale(1.1);
+  color: #e74c3c;
+  text-shadow: 0 0 8px rgba(231, 76, 60, 0.5);
 }
 
 /*第二页面样式 */
@@ -255,5 +284,4 @@ button:hover {
   align-items: flex-start;
   padding-top: 40vh;
 }
-
 </style>
