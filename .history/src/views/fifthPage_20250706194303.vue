@@ -193,7 +193,7 @@ onMounted(() => {
 
     .fifth-content-title h2 {
         padding-left: 5vw;
-        font-size: 2rem;
+        font-size: 2.5rem;
     }
 
     .wrap-card-title h3 {
