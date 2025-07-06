@@ -34,18 +34,19 @@
     </div>
     <div class="mask"></div>
   </div>
-
-
-  <div class="second-container">
-    <div class="second-content">
-      <p>关于我们</p>
-    </div>
-  </div>
+  <SecondPage />
+  <ThirdPage />
+  <ForthPage />
+  <FifthPage />
 </template>
 
 
 <script setup>
 import DotSphere from '@/components/DotSphere.vue';
+import SecondPage from '@/views/SecondPage.vue';
+import ThirdPage from '@/views/ThirdPage.vue';
+import ForthPage from '@/views/ForthPage.vue';
+import FifthPage from '@/views/FifthPage.vue';
 import { gsap } from 'gsap';
 import { onMounted, ref } from 'vue';
 
@@ -123,7 +124,6 @@ function WelcomeAnimation() {
   justify-content: space-between;
   align-items: center;
   height: 100px;
-  /* 固定高度 */
 }
 
 .navContent {
@@ -202,11 +202,12 @@ button:hover {
   position: relative;
   z-index: 2;
   text-align: left;
-  color: #000;
+  color: #ff5733;
   margin-left: 10vw;
 }
 
 .main-content-text .welcome {
+  color: #000;
   margin-bottom: 0.2rem;
 
 }
@@ -238,22 +239,5 @@ button:hover {
   pointer-events: none;
 }
 
-/*第二页面样式 */
-.second-container {
-  width: 100%;
-  height: 100vh;
-  position: relative;
-  display: flex;
-}
-
-.second-content {
-  width: 100%;
-  height: 100vh;
-  position: relative;
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
-  padding-top: 40vh;
-}
 
 </style>
